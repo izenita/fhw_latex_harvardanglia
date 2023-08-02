@@ -1,6 +1,6 @@
 # fhw_latex_harvardanglia
-Vorlage FHW für Harvard Anglia
-Keine Garantie auf Richtigkeit nach den Vorgaben der FHW.
+Vorlage FHW für Harvard Anglia,
+keine Garantie auf Richtigkeit nach den Vorgaben der FHW.
 Reine Vorlage zur selbstständigen Weiterentwicklung/Benutzung.
 
 LaTeX sollte vor der Nutzung installiert sein/installiert werden.
