@@ -1,0 +1,87 @@
+%\usepackage[utf8]{inputenc}		% UTF-8 Codierung
+\usepackage{fontspec}
+\usepackage{amsmath,amssymb,amstext}% Mathepakete
+\usepackage[ngerman]{babel}			% Sprachpaket deutsch
+\usepackage{natbib}
+\usepackage[nottoc, notlof, notlot]{tocbibind}
+\usepackage[nohyperlinks, printonlyused]{acronym}
+\usepackage{etoolbox}
+
+%Patch for acro dots
+\makeatletter
+\expandafter\patchcmd\csname AC@\AC@prefix{}@acro\endcsname
+ {#1]{#3}}
+ {#1]\dotfill\ {#3}}
+ {}{}
+\expandafter\patchcmd\csname AC@\AC@prefix{}@acro\endcsname
+ {#1]{#3}}
+ {#1]\dotfill\ {#3}}
+ {}{}
+\makeatother
+
+% Angabe für QUellen
+\newcommand*{\quelle}{%
+  \footnotesize Quelle:
+}
+
+% Packages Bilder und Bildunterschhriften
+\usepackage{graphicx}				% Grafikpaket
+\usepackage{caption}				% Bildunterschriften
+\usepackage{float}
+
+% Page setup packages and settings
+\usepackage{tikz}
+\usepackage[nottoc]{tocbibind}
+\usepackage{setspace}
+\usepackage{pdfpages}
+\usepackage{adjustbox}
+\usepackage{makecell}
+\usepackage{fancyhdr}
+\usepackage[margin=3.25cm]{geometry}
+\pagestyle{fancy}
+\renewcommand\sectionmark[1]{\markboth{#1}{}}
+\setlength{\headheight}{15.5pt}
+\lfoot{}
+\cfoot{}
+\rfoot{}
+\lhead{\leftmark}
+\rhead{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\allowdisplaybreaks[1]
+\setlength\parindent{0pt} % disable indents on new paragraph
+\setlength\parskip{10pt}  % setup skip between paragraphs
+\usepackage[hidelinks]{hyperref}	  % make toc links
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+\usepackage{titlesec}
+\usepackage{lipsum}	% demo data
+
+% Redefine titlepage to set title page to page I
+\makeatletter
+\renewenvironment{titlepage}
+ {%
+  \if@twocolumn
+    \@restonecoltrue\onecolumn
+  \else
+    \@restonecolfalse\newpage
+  \fi
+  \thispagestyle{empty}%
+ }
+ {%
+  \if@restonecol
+    \twocolumn
+  \else
+    \newpage
+  \fi
+ }
+\makeatother
+
+\titlespacing*{\section}
+{0cm}{0cm}{0.1cm}
+\titlespacing*{\subsection}
+{0cm}{0cm}{0cm}

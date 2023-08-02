@@ -1,0 +1,124 @@
+\documentclass[titlepage,a4paper,12pt]{article}
+
+\usepackage{texfiles/setup}
+\usepackage{config/config}
+
+% Um diese Vorlage zu verwenden, müssen ein paar Einstellungen vorgenommen werden.
+% Der Code wird immer aus main.tex compiliert, wenn möglich mit "LuaLaTeX",
+% die Gewährleistung der Funktion mit anderen Compilern kann nicht gegeben werden.
+%
+% Keine Daten im Ordner texfiles verändern, die Eingaben in die Teile wie Titelseite etc.
+% erfolgen über die config!
+%
+% Nach jeder Veränderung an Referenzierungen wie: Label, Überschriften, Zitierungen und 
+% Referenzen muss die main.tex ZWEI MAL kompiliert werden um diese zu übernehmen.
+% Bei einfacher Kompilation werden die Referenzierungen produziert aber noch nicht übernommen.
+% Bei Änderungen am Text o.ä. muss nur einmal kompiliert werden.
+%
+% Bei erster Benutzung dieser Vorlage zwei Mal mit LuaLaTeX compilieren.
+% Anschließend muss einmal wie unter 2. beschrieben die main.tex mit BibTeX compiliert werden, um
+% die Referenzierungen zu ermöglichen!
+% Dann noch zwei Mal mit LuaLaTeX compilieren um die Vorlagen korrekt in der PDF zu sehen.
+%
+% Ab hier bei Änderungen LuaLaTeX verwenden, außer es wird die Biblithek verändert.
+%
+% 1. Bearbeiten der config-Datei unter config/config.sty
+%	- Eingabe der Arbeitsdaten wie in der Datei beschrieben
+% 2. Anlegen von Bibliotheken (Literatur) in der library-Datei unter config/library.bib
+%	- Anlegen von Literatur wie dort vorgegeben oder im Internet nach Vorlagen suchen
+%	- Zum Benutzen der angelegten Literatur den Compiler BibTeX in der main.tex laufen lassen
+%	- Zitate mit folgendem Code einfügen: \citep[vgl.][S. 508 ff.]{bernstein97}
+%		[vgl. ] kann bei direkten Zitaten entfernt werden. bernstein97 ist z.B. das in der library
+% 	  	angegebene Referenzwort für das Buch, dieser Alias kann in library.bib frei gewählt werden
+% 3. Includieren einzelner Kapitel
+%	- Für jedes Kapitel wird eine KAPITELUEBERSCHRIFT.tex im Ordner Chapter erstellt
+%	- Jedes Kapitel wird mit \include{chapter/KAPITELUEBERSCHRIFT} im vorgesehenen Bereich
+%	    eingefügt
+%	- In den Kapiteldateien wird dann der Text geschrieben.
+%	- Hierarchie der Überschriften: \section{}, \subsection{}, \subsubsection{}
+% 4. Einfügen von Bildern
+%	\begin{figure}[ht]
+%		\centering
+%		\includegraphics[scale=0.5]{pic/bildname}
+%		\caption{Beispielbild}
+%		\label{pic:bildname}
+%		\quelle \citep[S. 8]{onsemi:MC34063A}
+%	\end{figure}
+%	- Das Bild wird mit dem vorangegangenen Code eingefügt. Der Dateiname wird unter bildname
+% 		angegeben. Mit scale wird manuell nach dem trial-and-error Prinzip die gewünschte Bildgröße 
+% 		eingestellt (jedes Mal kompilieren). Die Caption gibt die Bildunterschrift an
+% 		Mit label wird ein Alias erstellt, der später mit \ref{pic:bildname} die Zahl des
+%		nummerierten Bildes ausgibt. Im Text daher später "wie in Bild \ref{pic:bildname} zu sehen"
+%		Der Quelle Befehlt erzeugt eine Quellenunterschrift.
+% 5. Hinzufügen von Abkürzungen
+%	\acro{cad}[CAD]{Computer Aided Design}
+%	- cad ist der Befehl um die Abkürzung aufzurufen, CAD wird im Abkürzungsverzeichnis angezeigt
+%		Computer Aided Design wird dann dort ausgeschrieben
+%	\ac{cad} zeigt beim ersten Benutzen Computer Aided Design (CAD) und anschließend nur noch CAD. 
+% 6. Werden Teile des Dokumentes nicht benötigt (Abkürzungsverzeichnis, Anhang, Tabellenverzeichnis
+%		o.ä. dann müssen diese gelöscht werden, an den in dieser Datei kommentierten Punkten dann
+%		einfach den jeweiligen Block löschen
+
+\begin{document}
+
+% Include titlepage
+\include{texfiles/titlepage}
+	
+% Sperrvermerk, entfernen falls kein Sperrvermerk aufgelegt wird	
+\include{texfiles/sperrvermerk}
+
+% Inhaltsverzeichnis
+\setstretch{0}
+\tableofcontents
+\newpage
+
+% Abbildungsverzeichnis, entfernen falls keine Abbildungen vorhanden
+\cleardoublepage\phantomsection\addcontentsline{toc}{section}{\listfigurename}
+\listoffigures
+\newpage
+
+% Tabellenverzeichnis, entfernen falls keine Tabellen vorhanden
+\cleardoublepage\phantomsection\addcontentsline{toc}{section}{\listtablename}
+\listoftables
+\newpage
+
+% Abkürzungsverzeichnis, entfernen falls keine Abkürzungen vorhanden
+\cleardoublepage\phantomsection\addcontentsline{toc}{section}{Abkürzungsverzeichnis}
+\section*{Abkürzungsverzeichnis}
+\begin{acronym}[sepsepsep]
+	\acro{cad}[CAD]{Computer Aided Design}
+\end{acronym}
+\newpage
+
+% Letzte Einstellungen für den Rest des Textes
+\pagenumbering{arabic}
+\setstretch{1.35}
+
+% Includes für die einzelnen Kapitel
+% Keine Dateiendung verwenden, die Kapitel als .tex file speichern
+% \include{chapter/xyz}
+
+\include{chapter/einleitung}
+
+
+
+
+% Abspannseiten: Literaturverzeichnis, Anhang und Eigenständigkeitserklärung
+
+\newpage
+% Set page numbering to roman
+\pagenumbering{roman}
+
+% Literaturverzeichnis
+\bibliographystyle{agsm}
+\bibliography{config/library}
+\newpage
+
+% Anhang, entfernen falls kein Anhang vorhanden
+\include{chapter/anhang}
+\newpage
+
+% Abschlusserklärung
+\include{texfiles/erklaerung}
+
+\end{document}

@@ -1,0 +1,55 @@
+% Pre pages before content, use roman numbering
+\pagenumbering{Roman}
+
+\begin{titlepage}
+	%include fhw logo to right top
+	\trimbox{-8.5cm 1.5cm 1cm 1cm}{	
+	\begin{tikzpicture}
+		\includegraphics[scale=1]{pic/title/fhw_logo}
+	\end{tikzpicture}}	
+	\begin{center}
+	
+		\setmainfont{Calibri}
+		\vspace{2.5cm}
+    		
+    	\textbf{\Huge \conftitle}\\
+    	\vspace{0.5cm}
+		\textbf{\Huge \conftitletwo}\\
+      	
+    	\vspace{2.25cm}
+		
+       	\textbf{\LARGE \confaut}\\
+       	\vspace{0.4cm}
+       	{\Large \confmatnr}\\ 
+       	\vspace{2.25cm}
+            
+       	{\large\confstudab arbeit im Studiengang \confstud\\
+       	\vspace{0.4cm}
+       	bei\\
+       	\vspace{0.4cm}
+       	\confprof\\}       
+            
+       	\vfill
+       
+       	\begin{minipage}{0.48\textwidth}
+       	\begin{flushleft}
+       		{\large\confadrstr\\
+       		\confadrort}
+       	\end{flushleft}
+		\end{minipage}       			       	
+		\hfill
+       	\begin{minipage}{0.48\textwidth}
+       	\begin{flushright}
+       		{\large\confstudf\\
+       		\confstudftwo}
+       	\end{flushright}
+		\end{minipage}
+		       			       			       	
+       	\vspace{1cm}
+
+       	{\large\confdate		\hfill	\confsem. Semester}
+   	\end{center}
+\end{titlepage}
+
+% Set arial for the rest of the document
+\setmainfont{Arial}
