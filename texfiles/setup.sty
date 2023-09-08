@@ -7,15 +7,20 @@
 \usepackage[nohyperlinks, printonlyused]{acronym}
 \usepackage{etoolbox}
 
+% Eigener Dotfill für die Verzeichnisse
+\makeatletter
+\newcommand \Dotfill {\leavevmode \cleaders \hb@xt@ .8em{\hss .\hss }\hfill \kern \z@}
+\makeatother
+
 %Patch for acro dots
 \makeatletter
 \expandafter\patchcmd\csname AC@\AC@prefix{}@acro\endcsname
  {#1]{#3}}
- {#1]\dotfill\ {#3}}
+ {#1]\Dotfill\ {#3}}
  {}{}
 \expandafter\patchcmd\csname AC@\AC@prefix{}@acro\endcsname
  {#1]{#3}}
- {#1]\dotfill\ {#3}}
+ {#1]\Dotfill\ {#3}}
  {}{}
 \makeatother
 
@@ -31,13 +36,58 @@
 
 % Page setup packages and settings
 \usepackage{tikz}
-\usepackage[nottoc]{tocbibind}
+
+% Setup tabke of contents, list of figures and list of tables, list of symbols
+\usepackage[titles]{tocloft}
+\renewcommand{\cftsecfont}{\mdseries}		% section font not bold
+\renewcommand{\cftsecpagefont}{\mdseries}	% section numbers font not bold
+\renewcommand{\cftfigpresnum}{Abbildung\ }	% Abbildung vor der Abbildungsnummer
+\renewcommand{\cftfigaftersnum}{:} % put this after the table number
+\renewcommand{\cfttabpresnum}{Tabelle\ }	% Tabelle vor der Abbildungsnummer
+\renewcommand{\cfttabaftersnum}{:} % put this after the table number
+%Dotfills für das ganze TOC
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\cftpartleader}{\cftdotfill{\cftdotsep}}
+% Abstände für das ganze TOC
+\renewcommand{\cftbeforesubsecskip}{5pt}
+\renewcommand{\cftbeforesecskip}{5pt}
+\newlength{\mylenf}
+\settowidth{\mylenf}{\cftfigpresnum}
+\setlength{\cftfignumwidth}{\dimexpr\mylenf+1.5em}
+\setlength{\cfttabnumwidth}{\dimexpr\mylenf+1.5em}
+\setlength{\cftfigindent}{0pt}  % remove indentation from figures in lof
+\setlength{\cfttabindent}{0pt}  % remove indentation from tables in lot
+\usepackage[final,noxspace]{listofsymbols}	% use package for symbol list
+\addtocontents{toc}{\vspace{.4cm}}
+\addtocontents{lof}{\vspace{.4cm}}	% Platz nach Überschrift
+\addtocontents{lot}{\vspace{.4cm}}	% Platz nach Überschrift
+\renewcommand{\symindent}{0em}
+\renewcommand{\symheading}{}	% Disable listofsymbols heading
+\setlength{\symwidth}{0cm}	% Keine Leerzeichen zwischen Symbol und Punkten
+\renewcommand{\printsymline}[5]{\ensuremath{\mathrm{#2}}\Dotfill #4\\}	% Neue Funktion zum Schreiben der Formelzeichen
+%Header für listofsymbols
+\renewcommand{\symheadingname}{Verzeichnis der Formelzeichen, Symbole und Indizes}
+\newcommand{\losheader}{\cleardoublepage\phantomsection\addcontentsline{toc}{section}{\symheadingname} % TOC Überschrift für Abkürzungsverzeichnis
+\section*{\symheadingname}
+\vspace{.2cm}
+\sectionmark{\symheadingname} % Page title
+\setstretch{1.5}}
+%Header für acro
+\newcommand{\acroname}{Abkürzungsverzeichnis}
+\newcommand{\acroheader}{\cleardoublepage\phantomsection\addcontentsline{toc}{section}{\acroname} % TOC Überschrift für Abkürzungsverzeichnis
+\setstretch{0}
+\sectionmark{\acroname} % Page title
+\section*{\acroname}\vspace{.1cm}}
+\renewcommand*{\acsfont}[1]{\normalfont#1} % acro nicht dick
+
+
 \usepackage{setspace}
 \usepackage{pdfpages}
 \usepackage{adjustbox}
 \usepackage{makecell}
 \usepackage{fancyhdr}
 \usepackage[margin=3.25cm]{geometry}
+\newgeometry{left = 35mm, right = 20mm, top = 30mm, bottom = 20mm}
 \pagestyle{fancy}
 \renewcommand\sectionmark[1]{\markboth{#1}{}}
 \setlength{\headheight}{15.5pt}
@@ -80,6 +130,7 @@
   \fi
  }
 \makeatother
+
 
 \titlespacing*{\section}
 {0cm}{0cm}{0.1cm}

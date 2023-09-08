@@ -68,25 +68,41 @@
 \include{texfiles/sperrvermerk}
 
 % Inhaltsverzeichnis
-\setstretch{0}
+\setstretch{1}
 \tableofcontents
+\sectionmark{Inhaltsverzeichnis}
 \newpage
 
-% Abbildungsverzeichnis, entfernen falls keine Abbildungen vorhanden
-\cleardoublepage\phantomsection\addcontentsline{toc}{section}{\listfigurename}
-\listoffigures
+% Abbildungsverzeichnis, Block entfernen falls keine Abbildungen vorhanden
+\cleardoublepage\phantomsection\addcontentsline{toc}{section}{\listfigurename}	% TOC Überschrift für Inhaltsverzeichnis
+\listoffigures	% Abbildungsverzeichnis einfügen
+\sectionmark{Abbildungsverzeichnis}
 \newpage
 
-% Tabellenverzeichnis, entfernen falls keine Tabellen vorhanden
-\cleardoublepage\phantomsection\addcontentsline{toc}{section}{\listtablename}
-\listoftables
+% Tabellenverzeichnis, Block entfernen falls keine Tabellen vorhanden
+\cleardoublepage\phantomsection\addcontentsline{toc}{section}{\listtablename}	% TOC Überschrift für Inhaltsverzeichnis
+\listoftables	% Tabellenverzeichnis einfügen
+\sectionmark{Tabellenverzeichnis}
 \newpage
 
-% Abkürzungsverzeichnis, entfernen falls keine Abkürzungen vorhanden
-\cleardoublepage\phantomsection\addcontentsline{toc}{section}{Abkürzungsverzeichnis}
-\section*{Abkürzungsverzeichnis}
-\begin{acronym}[sepsepsep]
+% Formel/Symbol/Indizes-Verzeichnis, Block entfernen falls keine vorhanden
+\losheader
+\opensymdef	% Erstellen eines Formelzeichens: \newsym[ Beschreibung ]{ befehl }{ Abkürzung }
+% Werden nicht sortiert und auch ohne Verwendung eingefügt
+% Selbstständige Sortierung: Nach Alphabet, erst lateinisches, dann griechisches
+% Befehl darf nicht mit vorhandenem Befehl übereinstimmen, daher außergewöhnlichen Namen wählen oder Prefix verwenden
+\newsym[Elektrische Energie]{mEel}{E_{el}}
+\newsym[Elektrische Impedanz]{mZ}{Z}
+\closesymdef
+\listofsymbols
+\newpage
+
+% Abkürzungsverzeichnis, Block entfernen falls keine Abkürzungen vorhanden
+\acroheader
+\begin{acronym} % Erstellen eines Akronyms: \acro{befehlsinhalt}[Abkürzung]{Beschreibung}
+% Werden nicht sortiert aber nur bei Verwendung eingefügt		
 	\acro{cad}[CAD]{Computer Aided Design}
+	\acro{drm}[DRM]{Digital Radio Mondiale}
 \end{acronym}
 \newpage
 

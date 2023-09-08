@@ -1,3 +1,13 @@
+## User spec files:
+*.els
+*.ist
+*.pdf
+*.sub
+*.suc
+*.syc
+*.syg
+*.sym
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
